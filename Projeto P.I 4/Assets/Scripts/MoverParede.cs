@@ -14,7 +14,7 @@ public class MoverComMundo : MonoBehaviour
         // Agora o script só tem UMA função: obedecer a velocidade e se mover!
         if (playerScript != null)
         {
-            transform.Translate(Vector3.down * playerScript.velocidadeVirtual * Time.deltaTime);
+            transform.Translate(Vector3.down * playerScript.velocidadeMundo * Time.deltaTime);
         }
     }
 }
