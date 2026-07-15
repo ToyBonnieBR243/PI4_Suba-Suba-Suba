@@ -765,6 +765,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a757f422c5ed31043a5db9c82bbdd7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoverComMundo
+--- !u!1 &846396337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7218983439117586478, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+  m_PrefabInstance: {fileID: 8212605189094949344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1005126995
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,11 +815,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParallaxFundo
   filaDeProgresso: {fileID: 1974379978}
-  multiplicadorFila: 0.5
+  multiplicadorFila: 0.017
   estrela1: {fileID: 1871489483}
   estrela2: {fileID: 1979581367}
   alturaEstrela: 13.65
-  multiplicadorEstrelas: 0.1
+  multiplicadorEstrelas: 0.005
 --- !u!1 &1040932149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,12 +1277,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControladorPulo
   forcaMaxima: 15
+  forcaMinima: 5
   taxaDeCarga: 20
   gravidade: 25
   velocidadeMaximaQueda: -2
   distanciaFaixa: 1.5
   velocidadeTroca: 15
   alturaParaCentralizar: 3.5
+  alturasDeCheckpoint:
+  - 350
+  prefabChaoSeguro: {fileID: 846396337}
+  distanciaPreSpawn: 50
+  ajustePeY: -1.2
   textoAltura: {fileID: 9100749}
   textoPontos: {fileID: 323815039}
   textoMultiplicador: {fileID: 1980132300}
@@ -1286,6 +1297,7 @@ MonoBehaviour:
   alturaAtual: 0
   velocidadeVirtual: 0
   velocidadeMundo: 0
+  variacaoMundo: 0
 --- !u!1 &1687848237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,6 +1933,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1610985910478384077, guid: 5b8b3de8a69a330459788454d1935934, type: 3}
   m_PrefabInstance: {fileID: 5664155566607881926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8212605189094949344
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1229469019196536719, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7218983439117586478, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
+      propertyPath: m_Name
+      value: Acampamento Checkpoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1930,6 +1999,7 @@ SceneRoots:
   - {fileID: 647534199}
   - {fileID: 1620990150}
   - {fileID: 5664155566607881926}
+  - {fileID: 8212605189094949344}
   - {fileID: 1687848239}
   - {fileID: 1005126996}
   - {fileID: 1871489483}

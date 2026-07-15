@@ -9,12 +9,13 @@ public class MoverComMundo : MonoBehaviour
         playerScript = FindFirstObjectByType<ControladorPulo>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        // Agora o script só tem UMA função: obedecer a velocidade e se mover!
         if (playerScript != null)
         {
-            transform.Translate(Vector3.down * playerScript.velocidadeMundo * Time.deltaTime);
+            // O Segredo: Movemos pela distância exata calculada (variacaoMundo).
+            // Retiramos o Time.deltaTime porque essa variação já é o movimento puro!
+            transform.Translate(Vector3.down * playerScript.variacaoMundo, Space.World);
         }
     }
 }

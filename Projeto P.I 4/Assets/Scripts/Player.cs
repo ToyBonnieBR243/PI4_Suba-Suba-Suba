@@ -20,6 +20,16 @@ public class ControladorPulo : MonoBehaviour
     [Tooltip("Distância que o player precisa subir para travar no meio da tela")]
     public float alturaParaCentralizar = 3.5f;
 
+    [Header("Checkpoints (Áreas Seguras)")]
+    public float[] alturasDeCheckpoint = { 350f };
+    public GameObject prefabChaoSeguro;
+
+    [Tooltip("Quantos metros antes o checkpoint deve aparecer na tela?")]
+    public float distanciaPreSpawn = 50f;
+
+    [Tooltip("Ajuste negativo para o chão ficar nos pés e não no meio do personagem")]
+    public float ajustePeY = -1.5f;
+
     [Header("Interface (UI)")]
     public TextMeshProUGUI textoAltura; // Onde vamos arrastar o texto da tela
     public TextMeshProUGUI textoPontos;
@@ -33,7 +43,13 @@ public class ControladorPulo : MonoBehaviour
 
     // A velocidade que os outros scripts vão ler
     [HideInInspector] public float velocidadeMundo = 0f;
-
+    [HideInInspector] public float variacaoMundo = 0f;
+    
+    
+    private float posicaoMundoAnterior = 0f;
+    private float chaoAtual = 0f; // Começa no zero
+    private int proximoCheckpointIndex = 0; // Controla qual é o próximo da lista
+    private bool checkpointSpawnado = false; // Avisa se a imagem já foi criada
     private float cargaAtual = 0f;
     private bool estaPulando = false;
     private int faixaAtual = 0;
@@ -44,6 +60,7 @@ public class ControladorPulo : MonoBehaviour
     {
         // Salva exatamente a posição Y onde o personagem começou (em cima do chão zero)
         yInicial = transform.position.y;
+        posicaoMundoAnterior = Mathf.Max(0f, alturaAtual - alturaParaCentralizar);
     }
 
     void Update()
@@ -84,10 +101,10 @@ public class ControladorPulo : MonoBehaviour
             // O MEDIDOR ENTRA AQUI: Acompanha a subida e a descida
             alturaAtual += velocidadeVirtual * Time.deltaTime;
 
-            // A trava do Chão Original! Se bater no zero, ele pousa perfeitamente.
-            if (alturaAtual <= 0f)
+            // A trava dinâmica! Se bater no chão atual (0, 350, 700...), pousa perfeitamente.
+            if (alturaAtual <= chaoAtual)
             {
-                alturaAtual = 0f;
+                alturaAtual = chaoAtual;
                 velocidadeVirtual = 0f;
                 estaPulando = false;
             }
@@ -144,5 +161,40 @@ public class ControladorPulo : MonoBehaviour
             // O "F1" força o Unity a sempre mostrar uma casa decimal (ex: 1.0, 1.5, 2.0)
             textoMultiplicador.text = multiplicadorAtual.ToString("F1") + "X";
         }
+
+        // 8. Gerador de Checkpoints (Spawns Seguros)
+        if (proximoCheckpointIndex < alturasDeCheckpoint.Length)
+        {
+            float alturaAlvo = alturasDeCheckpoint[proximoCheckpointIndex];
+
+            // FASE 1: Cria o Acampamento visualmente antes do jogador chegar lá
+            if (alturaAtual >= alturaAlvo - distanciaPreSpawn && !checkpointSpawnado)
+            {
+                if (prefabChaoSeguro != null)
+                {
+                    // Calcula a distância exata que falta para chegar lá
+                    float distanciaFaltante = alturaAlvo - alturaAtual;
+
+                    // Ele nasce acima do jogador + o ajuste de alinhamento dos pés
+                    Vector3 posChao = new Vector3(0f, transform.position.y + distanciaFaltante + ajustePeY, 0f);
+
+                    Instantiate(prefabChaoSeguro, posChao, Quaternion.identity);
+                }
+                checkpointSpawnado = true; // Trava para não criar clones infinitos
+            }
+
+            // FASE 2: A trava invisível de salvamento só sobe quando o jogador cruzar a marca
+            if (alturaAtual >= alturaAlvo)
+            {
+                chaoAtual = alturaAlvo; // O novo "fundo do poço" agora é aqui
+                proximoCheckpointIndex++;
+                checkpointSpawnado = false; // Destrava para o próximo checkpoint (ex: 700m)
+            }
+        }
+
+        // 9. Cálculo exato do movimento do mundo
+        float posicaoMundoAtual = Mathf.Max(0f, alturaAtual - alturaParaCentralizar);
+        variacaoMundo = posicaoMundoAtual - posicaoMundoAnterior;
+        posicaoMundoAnterior = posicaoMundoAtual;
     }
 }
