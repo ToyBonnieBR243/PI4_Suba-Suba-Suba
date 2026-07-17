@@ -324,6 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a757f422c5ed31043a5db9c82bbdd7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoverComMundo
+  mudaDeCor: 1
 --- !u!1 &6972442982952067757
 GameObject:
   m_ObjectHideFlags: 0

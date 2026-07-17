@@ -16,6 +16,13 @@ public class ControladorPulo : MonoBehaviour
     public float distanciaFaixa = 1.5f;
     public float velocidadeTroca = 15f;
 
+    [Header("Sistema de Cores das Paredes")]
+    [Tooltip("Em quais alturas a cor deve mudar? Ex: 350, 700")]
+    public float[] alturasDasCores = { 350f };
+
+    [Tooltip("Lista de Cores. Precisa ter UMA cor a mais que a lista de alturas!")]
+    public Color[] listaDeCores;
+
     [Header("Medidor de Altura (Câmera)")]
     [Tooltip("Distância que o player precisa subir para travar no meio da tela")]
     public float alturaParaCentralizar = 3.5f;

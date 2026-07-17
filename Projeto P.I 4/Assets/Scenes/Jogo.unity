@@ -765,6 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a757f422c5ed31043a5db9c82bbdd7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoverComMundo
+  mudaDeCor: 0
 --- !u!1 &846396337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7218983439117586478, guid: 725f412fb18a10740abbd5ba4763939d, type: 3}
@@ -1283,6 +1284,11 @@ MonoBehaviour:
   velocidadeMaximaQueda: -2
   distanciaFaixa: 1.5
   velocidadeTroca: 15
+  alturasDasCores:
+  - 300
+  listaDeCores:
+  - {r: 0.4784314, g: 0.4784314, b: 0.4784314, a: 1}
+  - {r: 0.5327004, g: 0.6603774, b: 0.46413317, a: 1}
   alturaParaCentralizar: 3.5
   alturasDeCheckpoint:
   - 350
